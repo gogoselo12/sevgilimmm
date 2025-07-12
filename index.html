@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minnoşum 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(to bottom, #ffe0ec, #fff0f5);
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 24px;
+      margin-top: 80px;
+      color: #800040;
+    }
+    .buton {
+      font-size: 20px;
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+    .evet {
+      background-color: #a3f7bf;
+      z-index: 1;
+    }
+    .hayir {
+      background-color: #ff8da7;
+      z-index: 2;
+    }
+    .kalp {
+      position: fixed;
+      font-size: 24px;
+      animation: fly 3s linear forwards;
+      pointer-events: none;
+      color: red;
+    }
+    @keyframes fly {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+    #mesaj {
+      font-size: 22px;
+      color: #d4006a;
+      margin-top: 40px;
+      font-weight: bold;
+      position: relative;
+      z-index: 3;
+    }
+  </style>
+</head>
+<body onclick="muzigiCal()">
+
+  <h1 id="soru">Beni seviyor musun?</h1>
+
+  <button id="evet" class="buton evet" onclick="evetTikla()" style="left: 30%; top: 60%;">Evet</button>
+  <button id="hayir" class="buton hayir" onclick="hayirTikla()" style="left: 60%; top: 60%;">Hayır</button>
+
+  <div id="mesaj"></div>
+
+  <script>
+    const sorular = [
+      "Beni seviyor musun?",
+      "Emin misin?",
+      "Bak bu son şansın...",
+      "Tekrar düşün lütfen.",
+      "Hata yapma sakın.",
+      "Sevdiğini biliyorum!",
+      "Naz yapma hadi 😄",
+      "Hadi bas artık evete",
+      "Sonsuza kadar bekleyemem 😜",
+      "Kalbim seninle biliyorum",
+      "İnkar etme lütfen",
+      "Gözlerin her şeyi söylüyor",
+      "Cidden hayır mı diyorsun?",
+      "Aşk kazanacak!",
+      "Seni çok özledim",
+      "Bu bir aşk testi 💌",
+      "Kalbim pıt pıt atıyor",
+      "Cevabın hayatımı değiştirecek 😭",
+      "Yumuşadın bence 😊",
+      "Bak minnoşum üzme beni 😢",
+      "Aşk kaçmaz, yakala şimdi!",
+      "Bak bu son çağrı! 🥹",
+      "Kalbimi kırıyorsun ama 😔",
+      "Hadi artık tıkla eveti 🙈"
+    ];
+
+    let soruIndex = 0;
+    let hayirBoyut = 20;
+    let evetBoyut = 20;
+
+    function hayirTikla() {
+      // Yeni soru
+      soruIndex = (soruIndex + 1) % sorular.length;
+      document.getElementById("soru").textContent = sorular[soruIndex];
+
+      // Buton boyutları
+      hayirBoyut = Math.max(5, hayirBoyut - 2);
+      evetBoyut = Math.min(300, evetBoyut + 10);
+
+      document.getElementById("hayir").style.fontSize = hayirBoyut + "px";
+      document.getElementById("evet").style.fontSize = evetBoyut + "px";
+
+      // Hayır butonunu ekranda rastgele taşı
+      const hayir = document.getElementById("hayir");
+      const x = Math.floor(Math.random() * 80); // % cinsinden
+      const y = Math.floor(Math.random() * 70) + 10;
+      hayir.style.left = x + "%";
+      hayir.style.top = y + "%";
+    }
+
+    function evetTikla() {
+      document.getElementById("soru").textContent = "";
+      document.getElementById("mesaj").textContent = "Seni çok seviyorum güzel minnoşum 💖";
+
+      // Kalpler uçsun
+      for (let i = 0; i < 30; i++) {
+        const kalp = document.createElement("div");
+        kalp.className = "kalp";
+        kalp.textContent = "❤️";
+        kalp.style.left = Math.random() * 100 + "vw";
+        kalp.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(kalp);
+        setTimeout(() => kalp.remove(), 3000);
+      }
+
+      // Butonları yok et
+      document.getElementById("evet").style.display = "none";
+      document.getElementById("hayir").style.display = "none";
+    }
+  </script>
+</body>
+</html>
